@@ -1,0 +1,9 @@
+= Table.AddColumn(#"Tipo Alterado VendaComDesconto", "Data da Venda Convertida", each let
+            DataTexto = Text.Trim([Data da Venda]), 
+            DataPartes = Text.Split(DataTexto, "/"), 
+            Dia = Text.PadStart(DataPartes{1}, 2, "0"), 
+            Mes = Text.PadStart(DataPartes{0}, 2, "0"),
+            Ano = DataPartes{2},
+            DataConvertida = Date.FromText(Dia & "/" & Mes & "/" & Ano) 
+        in
+            DataConvertida)
