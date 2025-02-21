@@ -1,0 +1,29 @@
+Calendario = 
+VAR DataInicial = DATE(2024, 1, 1)
+VAR DataFinal = DATE(2024, 12, 31)
+RETURN
+ADDCOLUMNS(
+    GENERATESERIES(DataInicial, DataFinal, 1),
+    "Ano", YEAR([Value]),
+    "Mês", MONTH([Value]),
+    "Dia", DAY([Value]),
+    "Nome do Dia", FORMAT([Value], "dddd"),
+    "Nome do Mês", FORMAT([Value], "MMMM"),
+    "Mês Ordem", MONTH([Value]),
+    "Trimestre", 
+        SWITCH(
+            TRUE(),
+            MONTH([Value]) <= 3, "1° Trimestre",
+            MONTH([Value]) <= 6, "2° Trimestre",
+            MONTH([Value]) <= 9, "3° Trimestre",
+            "4° Trimestre"
+        ),
+    "Trimestre Ordem", 
+        SWITCH(
+            TRUE(),
+            MONTH([Value]) <= 3, 1,
+            MONTH([Value]) <= 6, 2,
+            MONTH([Value]) <= 9, 3,
+            4
+        )
+)
