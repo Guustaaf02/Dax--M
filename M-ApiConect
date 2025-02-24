@@ -1,0 +1,18 @@
+= (endpoint as text, pagina as number) =>
+
+let
+    Fonte = Web.Contents("https://the-one-api.dev", 
+        [
+            RelativePath="v2/"&endpoint,
+            Headers= [
+                Authorization="Bearer VhZ0vs2CrMChLP1mNsUn"
+            ],
+            Query = [
+                limit= "500",
+                page= Number.ToText(pagina)
+            ]
+        ]),
+    AbrirJson = Json.Document(Fonte),
+    docs = AbrirJson[docs]
+in
+    docs
